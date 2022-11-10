@@ -46,7 +46,7 @@ steps:
   displayName: "Publish packages"  
 - task: ArchiveFiles@2
   inputs:
-          rootFolderOrFile: simple-feed-reader/build
+          rootFolderOrFile: build
           includeRootFolder: false
           archiveType: 'zip'
           archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
