@@ -24,6 +24,12 @@ steps:
             dotnet restore
   displayName: "Restore packages"
 
+- task: CmdLine@2
+  inputs:
+          script: |
+            pushd simple-feed-reader
+            dotnet build
+  displayName: "Build packages"
 #- task: UseDotNet@2
 #  displayName: 'Use .NET Core sdk'
 #  inputs:
@@ -41,11 +47,11 @@ steps:
 #Your build pipeline references an undefined variable named ‘BuildConfiguration’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 
 
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    projects: '$(Parameters.RestoreBuildProjects)'
-    arguments: '--configuration $(BuildConfiguration)'
+#- task: DotNetCoreCLI@2
+#  displayName: Build
+ # inputs:
+ #   projects: '$(Parameters.RestoreBuildProjects)'
+  #  arguments: '--configuration $(BuildConfiguration)'
 
 
 
@@ -53,34 +59,34 @@ steps:
 #Your build pipeline references an undefined variable named ‘BuildConfiguration’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 
 
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: '$(Parameters.TestProjects)'
-    arguments: '--configuration $(BuildConfiguration)'
+#- task: DotNetCoreCLI@2
+ # displayName: Test
+  #inputs:
+   # command: test
+    #projects: '$(Parameters.TestProjects)'
+    #arguments: '--configuration $(BuildConfiguration)'
 
 
 #1Your build pipeline references an undefined variable named ‘BuildConfiguration’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 
 
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: True
+#- task: DotNetCoreCLI@2
+ # displayName: Publish
+  #inputs:
+   # command: publish
+    #publishWebProjects: True
+    #arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    #zipAfterPublish: True
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
+- #task: PublishBuildArtifacts@1
+  #displayName: 'Publish Artifact'
+  #inputs:
+   # PathtoPublish: '$(build.artifactstagingdirectory)'
+  #condition: succeededOrFailed()
 
 
-- task: DownloadPipelineArtifact@2
-  displayName: 'Download Pipeline Artifact'
-  inputs:
-    artifactName: drop
-    itemPattern: '**/*.zip'
+- #task: DownloadPipelineArtifact@2
+  #displayName: 'Download Pipeline Artifact'
+  #inputs:
+   # artifactName: drop
+   # itemPattern: '**/*.zip'
