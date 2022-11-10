@@ -22,7 +22,7 @@ steps:
           script: |
             pushd simple-feed-reader
             dotnet restore
-            displayName: "Restore packages"
+  displayName: "Restore packages"
 
 #- task: UseDotNet@2
 #  displayName: 'Use .NET Core sdk'
