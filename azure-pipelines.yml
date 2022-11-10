@@ -30,7 +30,7 @@ steps:
 
 - task: DownloadPipelineArtifact@2
   inputs:
-    artifact: WebApp
+    artifact: WebApp.zip
     patterns: '**/*.zip'
     path: $(Build.SourcesDirectory)/bin
 
