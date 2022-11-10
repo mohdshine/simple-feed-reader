@@ -30,6 +30,8 @@ steps:
             pushd simple-feed-reader
             dotnet build
   displayName: "Build packages"
+
+
 #- task: UseDotNet@2
 #  displayName: 'Use .NET Core sdk'
 #  inputs:
@@ -85,8 +87,3 @@ steps:
   #condition: succeededOrFailed()
 
 
-- #task: DownloadPipelineArtifact@2
-  #displayName: 'Download Pipeline Artifact'
-  #inputs:
-   # artifactName: drop
-   # itemPattern: '**/*.zip'
