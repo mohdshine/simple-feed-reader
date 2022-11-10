@@ -34,12 +34,18 @@ steps:
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)
     artifactName: WebApp
-- task: DownloadBuildArtifacts@0
+#- task: DownloadBuildArtifacts@0
+ # inputs:
+  #  buildType: 'current'
+   # downloadType: 'single'
+    #artifactName: 'WebApp'
+    #downloadPath: '$(System.ArtifactsDirectory)'
+
+- task: DownloadPipelineArtifact@2
   inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'WebApp'
-    downloadPath: '$(System.ArtifactsDirectory)'
+    artifact: WebApp
+    patterns: '**/*.zip'
+    path: $(Build.SourcesDirectory)/bin   
 
 #- task: VSTest@2
  # inputs:
