@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- main
+- main1
 
 pool:
   vmImage: 'windows-latest'
@@ -42,11 +42,11 @@ steps:
     publishLocation: 'Container'
 
 
-- task: DownloadPipelineArtifact@2
-  displayName: 'Download Pipeline Artifact'
-  inputs:
-    artifactName: drop
-    itemPattern: '**/*.zip'
+#- task: DownloadPipelineArtifact@2
+ # displayName: 'Download Pipeline Artifact'
+  #inputs:
+   # artifactName: drop
+    #itemPattern: '**/*.zip'
 
 #- task: DownloadBuildArtifacts@1
  # inputs:
