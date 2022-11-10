@@ -38,23 +38,36 @@ steps:
             pushd simple-feed-reader
             dotnet test
   displayName: "Test packages"
-- task: CmdLine@2
+#- task: CmdLine@2
+  #inputs:
+          #script: |
+           # pushd simple-feed-reader
+            #dotnet publish --no-build --output $(build.artifactstagingdirectory)'
+  #displayName: "Publish packages"  
+  
+- task: DotNetCoreCLI@2
   inputs:
-          script: |
-            pushd simple-feed-reader
-            dotnet publish --no-build --output $(build.artifactstagingdirectory)'
-  displayName: "Publish packages"  
-- task: ArchiveFiles@2
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+
+# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+- task: PublishPipelineArtifact@1
   inputs:
-          rootFolderOrFile: $(build.artifactstagingdirectory)'
-          includeRootFolder: false
-          archiveType: 'zip'
-          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-          replaceExistingArchive: true
-  displayName: 'Archive API'
-- task: PublishBuildArtifacts@1
-  inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          ArtifactName: 'dropAPI'
-          publishLocation: 'Container'
-  displayName: 'Publish Artifact API'  
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'myWebsiteName'
+#- task: ArchiveFiles@2
+ # inputs:
+  #        rootFolderOrFile: $(build.artifactstagingdirectory)'
+   #       includeRootFolder: false
+    #      archiveType: 'zip'
+     #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      #    replaceExistingArchive: true
+  #displayName: 'Archive API'
+#- task: PublishBuildArtifacts@1
+ # inputs:
+  #        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+   #       ArtifactName: 'dropAPI'
+    #      publishLocation: 'Container'
+  #displayName: 'Publish Artifact API'  
