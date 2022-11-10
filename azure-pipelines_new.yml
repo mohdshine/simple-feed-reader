@@ -32,3 +32,29 @@ steps:
   displayName: "Build packages"
 
 
+- task: CmdLine@2
+  inputs:
+          script: |
+            pushd simple-feed-reader
+            dotnet test
+  displayName: "Test packages"
+- task: CmdLine@2
+  inputs:
+          script: |
+            pushd simple-feed-reader
+            dotnet publish --no-build --output build
+  displayName: "Publish packages"  
+- task: ArchiveFiles@2
+  inputs:
+          rootFolderOrFile: simple-feed-reader
+          includeRootFolder: false
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+          replaceExistingArchive: true
+  displayName: 'Archive API'
+- task: PublishBuildArtifacts@1
+  inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'dropAPI'
+          publishLocation: 'Container'
+  displayName: 'Publish Artifact API'  
