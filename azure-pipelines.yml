@@ -32,13 +32,13 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: $(System.DefaultWorkingDirectory)/bin/WebApp
+    targetPath: $(System.DefaultWorkingDirectory)
     artifactName: WebApp
 - task: DownloadBuildArtifacts@0
   inputs:
     buildType: 'current'
     downloadType: 'single'
-    artifactName: 'drop'
+    artifactName: 'WebApp'
     downloadPath: '$(System.ArtifactsDirectory)'
 
 #- task: VSTest@2
