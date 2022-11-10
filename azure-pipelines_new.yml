@@ -42,11 +42,11 @@ steps:
   inputs:
           script: |
             pushd simple-feed-reader
-            dotnet publish --no-build --output build
+            dotnet publish --no-build --output $(build.artifactstagingdirectory)'
   displayName: "Publish packages"  
 - task: ArchiveFiles@2
   inputs:
-          rootFolderOrFile: build
+          rootFolderOrFile: $(build.artifactstagingdirectory)'
           includeRootFolder: false
           archiveType: 'zip'
           archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
