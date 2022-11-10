@@ -42,6 +42,12 @@ steps:
     publishLocation: 'Container'
 
 
+- task: DownloadPipelineArtifact@2
+  displayName: 'Download Pipeline Artifact'
+  inputs:
+    artifactName: drop
+    itemPattern: '**/*.zip'
+
 #- task: DownloadBuildArtifacts@1
  # inputs:
   # buildType: 'current'
